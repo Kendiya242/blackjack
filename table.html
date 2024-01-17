@@ -1,70 +1,69 @@
 <!DOCTYPE html>
-<!--
-  command:  ssh 2240062@portfolios.talentsprint.com 
-  url: https://portfolios.talentsprint.com/~2240062/blackjack/
-  password: TW@2023
-
--->
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="common.css" />
     <link rel="stylesheet" href="about.css" />
     <title>Gaming Table</title>
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <nav>
-        <ul>
-          <li><a href="#"> About </a></li>
-          <li><a href="./table.html"> Table</a></li>
-          <li><a href="./about.html"> Table</a></li>
-          <li><a href="./rules.html"> Rules</a></li>
-        </ul>
-      </nav>
-    </header>
+        <nav>
+          <ul>
+            <li><a href="./index.html"> About </a></li>
+            <li><a href="#"> Table</a></li>
+            <li><a href="./rules.html"> Rules</a></li>
+          </ul>
+        </nav>
+      </header>
     <main>
         <h1>Blackjack Gaming Table</h1>
         <section>
-          <h2>The Dealer's Cards</h2>
-          <ol>
-            <li>Face Down</li>
-            <li>Six of Clubs</li>
-          </ol>
+            <h2>The Dealer's Cards</h2>
+            <ol>
+                <li>Face Down</li>
+                <li>Six of Clubs</li>
+            </ol>
         </section>
         <section>
-          <h2>The Player's Cards</h2>
-          <ol>
-            <li>Ten of Diamonds</li>
-            <li>Ten of Clubs</li>
-          </ol>
+            <h2>The Player's Cards</h2>
+            <ol>
+                <li>Ten of Diamonds</li>
+                <li>Ten of Clubs</li>
+            </ol>
         </section>
         <section>
-          <h3>Player's Options</h3>
-          <dl>
-            <dt>Hit</dt>
-            <dd>Take another card</dd>
-  
-            <dt>Stand</dt>
-            <dd>Don't take any more cards</dd>
-  
-            <dt>Split</dt>
-            <dd>
-              Split two cards of the same denomination into two different hands,
-              for twice the imaginary price
-            </dd>
-          </dl>
+            <h3>Player's Options</h2>
+            <dl>
+                    <dt>Hit</dt>
+                    <dd>Take another card</dd>
+
+                    <dt>Stand</dt>
+                    <dd>Don't take any more cards
+                        <aside>(This is better the closer you are to 21)</aside>
+                    </dd>
+
+                    <dt>Split</dt>
+                    <dd>Split two cards of the same denomination into two different hands, for twice the imaginary price</dd>
+                    
+                    <dt>Insurance</dt>
+                    <dd>When the dealer shows an ace, bet their hand will be blackjack
+                        <aside>(This isn't really a great option for the player)</aside>
+                    </dd>
+                </li>
+            </dl>
         </section>
-      </main>
-    <footer>
-      <span id="copyright"> &copy; Classy Development </span>
-      <a href="#" class="mobileFeature"> Download the App!  </span>
-    </footer>
-  </body>
+        <section>
+            <h3>Player's Actions</h3>
+            <button type="button" disabled>Hit</button>
+            <button type="button" >Stand</button>
+            <button type="button" >Split</button>
+            <button type="button" disabled="disabled">Insurance</button>
+        </section>
+    </main>
+    <footer> &copy; Classy Development</footer>
+</body>
 </html>
