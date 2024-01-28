@@ -1,0 +1,43 @@
+main {
+  display: grid;
+  grid-template: 30% 70% / 40% 60%;
+  height: calc(100vh - 180px);
+}
+section {
+  padding: 20px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+section p {
+  margin: 20px;
+}
+#hero {
+  grid-area: 1/1/2/3;
+  width: 1000px;
+  height: 30vh;
+}
+#whyUs {
+  grid-area: 2/1/2/2;
+  width: 400px;
+}
+#callToAction {
+  grid-area: 2/2/2/3;
+  flex-direction: column;
+  width: 600px;
+}
+@media (max-width: 800px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+  }
+  #whyUs {
+    display: none;
+    width: 400px;
+  }
+  #callToAction {
+    width: 400px;
+  }
+}
