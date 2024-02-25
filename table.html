@@ -4,51 +4,125 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="common.css" />
-    <link rel="stylesheet" href="about.css" />
-    <title>Blackjack</title>
+    <title>Blackjack Gaming Table</title>
+    <link rel="stylesheet" href="./reset.css" />
+    <link
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="./shell.css" />
+    <link rel="stylesheet" href="./utility.css" />
   </head>
   <body>
-    <header>
-      <nav>
-        <ul>
-          <li><a href="#"> About </a></li>
-          <li><a href="./table.html"> Table</a></li>
-          <li><a href="./rules.html"> Rules</a></li>
-        </ul>
-      </nav>
+    <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
+      <div class="mdc-top-app-bar__row">
+        <section
+          class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start"
+        >
+          <span class="mdc-top-app-bar__title">Blackjack</span>
+        </section>
+        <nav id="navLinks" class="mdc-top-app-bar__section">
+          <a href="/index.html">
+            <button class="mdc-button">
+              <span class="mdc-button__ripple"></span>
+              <span class="mdc-button__label mdc-theme--on-primary">
+                About
+              </span>
+            </button>
+          </a>
+          <a href="/rules.html">
+            <button class="mdc-button">
+              <span class="mdc-button__ripple"></span>
+              <span class="mdc-button__label mdc-theme--on-primary">
+                Rules
+              </span>
+            </button>
+          </a>
+          <a href="/table.html">
+            <button class="mdc-button">
+              <span class="mdc-button__ripple"></span>
+              <span class="mdc-button__label mdc-theme--on-primary">
+                Gaming Table
+              </span>
+            </button>
+          </a>
+        </nav>
+
+        <section
+          class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end"
+          role="toolbar"
+        >
+          <span id="loginIcon" class="material-icons"> login </span>
+          <span id="menu" class="material-icons"> menu </span>
+        </section>
+      </div>
     </header>
-    <main>
-      <section id="hero"><h1>Play the Blackjack with Us</h1></section>
-      <section id="whyUs">
-        <p class="disappearing">
-          Why Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Dignissimos eos ut accusamus praesentium placeat. Suscipit assumenda
-          obcaecati molestias, accusamus beatae, porro expedita reprehenderit
-          fugiat quos quaerat doloremque eveniet doloribus nesciunt.
-        </p>
-      </section>
-      <section id="callToAction">
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. A, doloribus
-          omnis! Nam, quaerat. Magnam maiores aliquid voluptatibus sed
-          repellendus, assumenda suscipit repellat, necessitatibus corrupti
-          dolorem velit facilis in a placeat. Money Lorem ipsum dolor sit,
-          ametconsectetur adipisicing elit. Facere exercitationem necessitatibus
-          magni eos molestias. Cumque consectetur animi consequuntur maiores
-          magnam aliquid quos eos hic sunt, commodi totam perferendis rem
-          laboriosam.
-        </p>
-        <button>Start Playing</button>
-      </section>
+    <main
+      class="mdc-top-app-bar--fixed-adjust footer--fixed-adjust mdc-layout-grid"
+    >
+      <div class="mdc-layout-grid__inner main-container">
+        <section
+          id="dealersCards"
+          class="mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet mdc-card give-height flex-center space-evenly"
+        >
+          <h2>The Dealer's Cards</h2>
+          <ol class="flex-center space-evenly take-width">
+            <li data-blackjack-value="?">Face Down</li>
+            <li data-blackjack-value="6">Six of Clubs</li>
+          </ol>
+        </section>
+        <section
+          id="playersCards"
+          class="mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet mdc-card give-height flex-center space-evenly"
+        >
+          <h2>The Player's Cards</h2>
+          <ol class="flex-center space-evenly take-width">
+            <li data-blackjack-value="10">Ten of Diamonds</li>
+            <li data-blackjack-value="10">Queen of Clubs</li>
+          </ol>
+        </section>
+        <section
+          id="playersActions"
+          class="mdc-layout-grid__cell--span-12 mdc-card flex-center"
+        >
+          <h3 class="ampler-padding">Player's Actions</h3>
+          <div class="flex-center space-evenly ampler-padding take-width">
+            <button
+              class="mdc-button mdc-button--raised"
+              data-user-hints="Take another card"
+            >
+              <span class="mdc-button__label">Hit</span>
+            </button>
+            <button
+              class="mdc-button mdc-button--raised"
+              data-user-hints="Don't take any more cards (This is better the closer you are to 21)"
+            >
+              <span class="mdc-button__label">Stand</span>
+            </button>
+            <button
+              class="mdc-button mdc-button--raised"
+              data-user-hints="Split two cards of the same denomination into two different hands, for twice the imaginary price"
+            >
+              <span class="mdc-button__label">Split</span>
+            </button>
+            <button
+              class="mdc-button mdc-button--raised"
+              data-user-hints="When the dealer shows an ace, bet their hand will be blackjack (This isn't really a great option for the player)"
+            >
+              <span class="mdc-button__label">Insure</span>
+            </button>
+          </div>
+        </section>
+      </div>
     </main>
     <footer>
-      <span id="copyright"> &copy; Classy Development </span>
-      <a href="#" class="mobileFeature"> Download the App!  </span>
+      <span id="copyright"> &copy; MarginWise </span>
     </footer>
+    <script src="./shell.js"></script>
   </body>
 </html>
