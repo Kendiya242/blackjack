@@ -1,47 +1,124 @@
+html {
+  --primary-color: rgb(255, 146, 29);
+  --primary-color-hover: rgb(231, 132, 27);
+
+  --secondary-color: #6f2d71;
+  --tertiary-color: rgb(17, 37, 30);
+  --quaternary-color: #fee1c7;
+  --quinary-color: #b5a886;
+  --radius: 8px;
+}
+* {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+}
+h1,
+h2,
+h3 {
+  font-family: "Crimson Text", serif;
+}
+h1 {
+  font-size: 40px;
+  margin: 20px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 25px;
+}
+/* Link Styles */
+a {
+  font-size: 30px;
+}
+a:link {
+  color: var(--secondary-color);
+  text-decoration: none;
+  position: relative;
+}
+a:visited {
+  color: var(--tertiary-color);
+}
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+a:active {
+  font-size: 32px;
+}
+/* button styles */
+button {
+  box-sizing: border-box;
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+  padding: 10px;
+  width: 120px;
+  font-weight: 700;
+  border-radius: var(--radius);
+  border: 2px solid var(--tertiary-color);
+}
+button:hover,
+button:focus {
+  background-color: var(--primary-color-hover);
+}
+button:active {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+/* utility classes */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-column {
+  flex-direction: column;
+}
+/* common layout classes */
 header {
   position: fixed;
   top: 0px;
   width: 100vw;
   height: 100px;
-  background-color: crimson;
+  background-color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-nav  {
+nav ul {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
+nav li {
+  display: inline;
+  margin: 50px;
+}
 
 main {
   padding-top: 100px;
   padding-bottom: 80px;
-}
-
-li {
-  display: inline;
-  margin: 50px;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: var(--quaternary-color);
 }
 
 footer {
   position: fixed;
   bottom: 0;
   width: 100vw;
-  background-color: crimson;
+  background-color: var(--primary-color);
   height: 80px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-
 #copyright,
 .mobileFeature {
   margin: 20px;
+  font-size: 10px;
 }
-
 .mobileFeature {
   display: none;
 }
