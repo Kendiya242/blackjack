@@ -1,0 +1,43 @@
+:root {
+    --mdc-theme-primary: green;
+  }
+  
+  #menu {
+    display: none;
+  }
+  footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100vw;
+    background-color: var(--mdc-theme-primary);
+    color: var(--mdc-theme-on-primary);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  #copyright {
+    margin: 20px;
+    font-size: 10px;
+  }
+  .footer--fixed-adjust {
+    padding-bottom: 64px;
+    min-height: calc(100vh - 64px - 52px);
+  }
+  
+  @media (max-width: 600px) {
+    #menu {
+      display: initial;
+    }
+    #navLinks,
+    #loginIcon {
+      display: none;
+    }
+    footer {
+      position: static;
+    }
+    .footer--fixed-adjust {
+      padding-bottom: 0px;
+    }
+  }
+  
