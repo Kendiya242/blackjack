@@ -17,6 +17,7 @@
     />
     <link rel="stylesheet" href="./shell.css" />
     <link rel="stylesheet" href="./utility.css" />
+    <link rel="stylesheet" href="./table.css" />
   </head>
   <body>
     <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
@@ -72,7 +73,7 @@
         >
           <h2>The Dealer's Cards</h2>
           <ol class="flex-center space-evenly take-width">
-            <li data-blackjack-value="?">Face Down</li>
+            <li data-blackjack-value="?">Face Down of Mystery</li>
             <li data-blackjack-value="6">Six of Clubs</li>
           </ol>
         </section>
@@ -88,13 +89,14 @@
         </section>
         <section
           id="playersActions"
-          class="mdc-layout-grid__cell--span-12 mdc-card flex-center"
+          class="mdc-layout-grid__cell--span-12 mdc-card flex-center flex-column hidden"
         >
           <h3 class="ampler-padding">Player's Actions</h3>
           <div class="flex-center space-evenly ampler-padding take-width">
             <button
               class="mdc-button mdc-button--raised"
               data-user-hints="Take another card"
+              id="hit-button"
             >
               <span class="mdc-button__label">Hit</span>
             </button>
@@ -118,11 +120,38 @@
             </button>
           </div>
         </section>
+        <section
+          id="betting"
+          class="mdc-layout-grid__cell--span-12 mdc-card flex-center"
+        >
+          <form
+            id="wager-form"
+            class="ampler-padding flex-center space-evenly take-width"
+          >
+            <span id="player-bankroll">Bankroll: $2022</span>
+            <label class="mdc-text-field mdc-text-field--filled wager-input">
+              <span class="mdc-text-field__ripple"></span>
+              <span class="mdc-floating-label ampler-padding" id="wager-label"
+                >Wager Amount</span
+              >
+              <input
+                class="mdc-text-field__input"
+                type="number"
+                aria-labelledby="wager-label"
+              />
+              <span class="mdc-line-ripple"></span>
+            </label>
+            <button class="mdc-button mdc-button--raised">
+              <span class="mdc-button__label">Wager</span>
+            </button>
+          </form>
+        </section>
       </div>
     </main>
     <footer>
       <span id="copyright"> &copy; MarginWise </span>
     </footer>
     <script src="./shell.js"></script>
+    <script src="./table.js"></script>
   </body>
 </html>
