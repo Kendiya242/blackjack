@@ -1,0 +1,62 @@
+main {
+    display: grid;
+    grid-template: 1fr 2fr 2fr / 1fr 1fr 1fr;
+  }
+  .heading-container {
+    grid-area: 1/1/1/4;
+  }
+  
+  #dealersCards {
+    grid-area: 2/2/3/3;
+  }
+  #playersCards {
+    grid-area: 3/2/4/3;
+  }
+  
+  ol {
+    display: flex;
+  }
+  ol li {
+    background-color: var(--quinary-color);
+    padding: 5px;
+    height: 140px;
+    width: 70px;
+    margin: 10px;
+    word-wrap: break-word;
+    position: relative;
+    border-radius: var(--radius);
+    border: 2px solid var(--tertiary-color);
+  }
+  ol li:hover::after {
+    content: attr(data-blackjack-value);
+    position: absolute;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    top: 70px;
+    left: 10px;
+    box-sizing: border-box;
+    width: 60px;
+    padding: 20px;
+  }
+  
+  #playersActions {
+    grid-area: 2/3/4/4;
+    justify-content: space-around;
+  }
+  /* page specific button styles */
+  button:hover::before {
+    content: attr(data-user-hints);
+    position: absolute;
+    top: 400px;
+    left: 20px;
+    background-color: var(--quinary-color);
+    box-sizing: border-box;
+    width: 220px;
+    padding: 20px;
+    border-radius: var(--radius);
+    border: 2px solid var(--tertiary-color);
+  }
+  button:active::before {
+    color: var(--tertiary-color);
+  }
+  
