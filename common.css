@@ -9,11 +9,12 @@ header {
   justify-content: center;
 }
 
-nav ul {
+nav  {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 
 main {
   padding-top: 100px;
@@ -27,21 +28,16 @@ li {
 
 footer {
   position: fixed;
-  bottom: 0px;
+  bottom: 0;
   width: 100vw;
-  height: 80px;
   background-color: crimson;
+  height: 80px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-
-#copyright {
-  position: absolute;
-  margin: 20px;
-}
-
+#copyright,
 .mobileFeature {
   margin: 20px;
 }
@@ -57,8 +53,5 @@ footer {
   }
   .mobileFeature {
     display: flex;
-  }
-  footer{
-    position: fixed;
   }
 }
