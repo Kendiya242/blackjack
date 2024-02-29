@@ -1,62 +1,85 @@
-main {
-    display: grid;
-    grid-template: 1fr 2fr 2fr / 1fr 1fr 1fr;
-  }
-  .heading-container {
-    grid-area: 1/1/1/4;
+#table {
+	margin-top: 20px;
   }
   
-  #dealersCards {
-    grid-area: 2/2/3/3;
-  }
-  #playersCards {
-    grid-area: 3/2/4/3;
+  h2 { 
+	color: var(--mdc-theme-on-secondary);
   }
   
-  ol {
-    display: flex;
-  }
-  ol li {
-    background-color: var(--quinary-color);
-    padding: 5px;
-    height: 140px;
-    width: 70px;
-    margin: 10px;
-    word-wrap: break-word;
-    position: relative;
-    border-radius: var(--radius);
-    border: 2px solid var(--tertiary-color);
-  }
-  ol li:hover::after {
-    content: attr(data-blackjack-value);
-    position: absolute;
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    top: 70px;
-    left: 10px;
-    box-sizing: border-box;
-    width: 60px;
-    padding: 20px;
+  h3 {
+	padding: 0px 0px 20px 20px;
   }
   
-  #playersActions {
-    grid-area: 2/3/4/4;
-    justify-content: space-around;
+  h4 {
+	padding: 0px 0px 20px 40px;
+	color: var(--mdc-theme-on-secondary);
   }
-  /* page specific button styles */
-  button:hover::before {
-    content: attr(data-user-hints);
-    position: absolute;
-    top: 400px;
-    left: 20px;
-    background-color: var(--quinary-color);
-    box-sizing: border-box;
-    width: 220px;
-    padding: 20px;
-    border-radius: var(--radius);
-    border: 2px solid var(--tertiary-color);
+  
+  ol > li {
+	color: var(--mdc-theme-on-secondary);
+	position: relative;
+	width: 50%;
   }
-  button:active::before {
-    color: var(--tertiary-color);
+  
+  ol > li:hover::after {
+	content: attr(data-blackjack-value);
+	position: absolute;
+	left: 125px;
+	/*padding: 10px;*/
+	background-color: var(--mdc-theme-secondary);
+	border: 2px solid var(--mdc-theme-on-secondary);
+	border-radius: 6px;
+	width: 30px;
+	height: 30px
+  }
+  
+  button {
+	position: relative;
+  }
+  
+  button#hit-button.mdc-button:hover::after, button#stand-button.mdc-button:hover::after, button#action-button.mdc-button:hover::after {
+	content: attr(data-user-hints);
+	font-size: 12px;
+	position: absolute;
+	top: 40px;
+	left: 0px;
+	padding: 10px;
+	background-color: var(--mdc-theme-secondary);
+	border: 1px solid var(--mdc-theme-on-secondary);
+	border-radius: 6px;
+	width: auto;
+  }
+  
+  button > p {
+	font-size: inherit;
+	color: inherit;
+	padding: 10px;
+	margin: 10px;
+  }
+  
+  .hidden-item {
+	display: none !important;
+  }
+  
+  #playersCards, #dealersCards {
+	padding: 10px;
+	margin: 10px;
+	border:  1px solid var(--accent-dark);
+	border-radius: 6px;
+	background-color: var(--mdc-theme-secondary);
+  }
+  
+  #playersActions, #betting {
+	padding: 20px;
+	margin: 20px 20px 60px;
+	border-color: var(--mdc-theme-on-secondary);
+	background-color: var(--mdc-theme-secondary);
+  }
+  
+  li.mdc-card {
+	height: auto;
+	width: 120px;
+	margin: 20px;
+	float: left;
   }
   
