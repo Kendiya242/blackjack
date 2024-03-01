@@ -1,67 +1,8 @@
-:root {
-	--data-blackjack-value: var(--data-blackjack-value);
-	--mdc-bg-color: #8b0000;
+.wager-input {
+	width: 200px;
   }
   
-  .mdc-top-app-bar {
-	background-color: var(--mdc-bg-color);
+  #dealersCards ol,
+  #playersCards ol {
+	flex-wrap: wrap;
   }
-  
-  .mdc-top-app-bar__title {
-	color: beige; 
-  }
-  
-  .mdc-top-app-bar__action-item {
-	margin-inline: 50px;
-	font-size: 24px;
-	color: beige; 
-  }
-  
-  .mdc-card {
-	margin-top: 80px;
-  }
-  
-  
-  /* Reset some default styles */
-  body {
-	  margin: 0;
-	  padding: 0;
-	}
-	
-	
-	
-	/* Header styles */
-	header {
-	  top: 0;
-	}
-  
-	article {
-	  background-color: orange; 
-	  color: black;
-	  top: 0;
-	  padding: 10px 0;
-	}
-	
-	main {
-	  margin-top: 100px;
-	  color: beige;
-	}
-  
-  
-	li:hover::after {
-	  content: attr(--data-blackjack-value);
-	}
-  
-	/* Footer styles */
-	footer {
-	  bottom: 0;
-	}
-	
-	/* Copyright span styles */
-	footer span#copyright {
-	  position: absolute;
-	  bottom: 0;
-	  right: 0;
-	}
-  
-  

@@ -78,3 +78,5 @@ function validateEligibility(event) {
   }
 }
 signUpButton.addEventListener("click", validateEligibility);
+
+

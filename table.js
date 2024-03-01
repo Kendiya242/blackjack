@@ -6,8 +6,17 @@ const foos = [].map.call(
   }
 );
 
-// BJ HW
 let deckId;
+
+function getShoe(callback) {
+  fetch(`https://www.deckofcardsapi.com/api/deck/new/shuffle?deck_count=6`)
+    .then((res) => res.json())
+    .then((data) => {
+      callback(data);
+    });
+}
+getShoe((data) => (deckId = data.deck_id));
+let wager;
 
 const suits = ["SPADES", "HEARTS", "DIAMONDS", "CLUBS"];
 const ranks = [
@@ -70,12 +79,6 @@ function rankToValue(rank) {
     return rank.toString();
   }
 }
-function hitPlayer() {
-  drawOneCard(dealCard);
-}
-function hitDealer() {
-  drawOneCard((card) => dealCard(card, false));
-}
 
 const playersActionsSection = document.querySelector("#playersActions");
 const bettingSection = document.querySelector("#betting");
@@ -91,16 +94,7 @@ const dealersCardList = document.querySelector("#dealersCards ol");
 const hitButton = document.querySelector("#hit-button");
 hitButton.addEventListener("click", hitPlayer);
 const standButton = document.querySelector("#stand-button");
-standButton.addEventListener("click", timeToBet);
-
-function dealToDisplay(card) {
-  const newCard = document.createElement("li");
-  newCard.setAttribute("data-blackjack-value", rankToValue(card.rank));
-  newCard.innerText = `${rankToWord(card.rank)} of ${suitToWord(card.suit)}`;
-
-  const playersCardList = document.querySelector("#playersCards ol");
-  playersCardList.appendChild(newCard);
-}
+standButton.addEventListener("click", dealersTurn);
 
 let playerBankroll = parseInt(localStorage.getItem("bankroll")) || 2022;
 function getBankroll() {
@@ -113,7 +107,7 @@ function setBankroll(newBalance) {
 
 function makeWager(e) {
   e.preventDefault();
-  console.log(wagerInput.value);
+  wager = parseInt(wagerInput.value);
   timeToPlay();
 }
 
@@ -128,16 +122,9 @@ function timeToPlay() {
   bettingSection.classList.add("hidden");
   playersActionsSection.classList.remove("hidden");
   drawFourCards(dealFourCards);
+  startPlayerActionTimeout();
 }
-//BJ ICP
-function getShoe(callback) {
-  fetch(`https://www.deckofcardsapi.com/api/deck/new/shuffle?deck_count=6`)
-    .then((res) => res.json())
-    .then((data) => {
-      callback(data);
-    });
-}
-getShoe((data) => (deckId = data.deck_id));
+
 function drawFourCards(callback) {
   fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw?count=4`)
     .then((res) => res.json())
@@ -146,7 +133,7 @@ function drawFourCards(callback) {
     });
 }
 function drawOneCard(callback) {
-  fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw?count=1`)
+  return fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw?count=1`)
     .then((res) => res.json())
     .then((data) => {
       callback(data.cards[0]);
@@ -154,7 +141,6 @@ function drawOneCard(callback) {
 }
 
 function dealFourCards(fourCards) {
-  console.log("You called me");
   const [first, second, third, fourth] = fourCards;
   dealCard(first);
   dealCard(second, false, false);
@@ -164,11 +150,12 @@ function dealFourCards(fourCards) {
 
 const backOfCardImageSrc =
   "https://previews.123rf.com/images/rlmf/rlmf1512/rlmf151200171/49319432-playing-cards-back.jpg";
-
+let dealersDownCard;
 function dealCard(card, isToPlayer = true, isFaceUp = true) {
   const newCard = document.createElement("li");
   const image = document.createElement("img");
   image.setAttribute("src", isFaceUp ? card.image : backOfCardImageSrc);
+  if (!isFaceUp) dealersDownCard = card;
   image.setAttribute(
     "alt",
     isFaceUp
@@ -184,6 +171,20 @@ function dealCard(card, isToPlayer = true, isFaceUp = true) {
   newCard.appendChild(image);
   (isToPlayer ? playersCardList : dealersCardList).appendChild(newCard);
 }
+function flipDownCard() {
+  const downCard = dealersCardList.children[0].children[0];
+  downCard.setAttribute("src", dealersDownCard.image);
+  downCard.setAttribute(
+    "alt",
+    `${rankToWord(dealersDownCard.value)} of ${suitToWord(
+      dealersDownCard.suit
+    )}`
+  );
+  downCard.setAttribute(
+    "data-blackjack-value",
+    rankToValue(dealersDownCard.value)
+  );
+}
 
 function removeChildren(domNode) {
   while (domNode.firstChild) {
@@ -194,3 +195,92 @@ function clearCards() {
   removeChildren(dealersCardList);
   removeChildren(playersCardList);
 }
+
+function getPlayerTotal(getDealerTotal = false) {
+  const playersCards = getDealerTotal
+    ? dealersCardList.children
+    : playersCardList.children;
+  let total = 0;
+  let aceCount = 0;
+  for (const card of playersCards) {
+    if (card.dataset.blackjackValue == "?") {
+      total += parseInt(rankToValue(dealersDownCard.value));
+    } else if (card.dataset.blackjackValue == "11/1") {
+      total += 11;
+      aceCount++;
+    } else {
+      total += parseInt(card.dataset["blackjackValue"]);
+    }
+  }
+  if (total > 21) {
+    while (aceCount > 0) {
+      total -= 10;
+      aceCount--;
+    }
+  }
+  return total;
+}
+
+function getDealerTotal() {
+  return getPlayerTotal(true);
+}
+
+async function dealersTurn() {
+  flipDownCard();
+  while (getDealerTotal() < 17) {
+    await hitDealer();
+  }
+  if (getDealerTotal() > 21) {
+    console.log("dealer busted");
+    takeStakes(true);
+  } else {
+    evalutateWinner();
+  }
+}
+function evalutateWinner() {
+  if (getPlayerTotal() > getDealerTotal()) {
+    console.log("player won");
+    takeStakes(true);
+  } else if (getPlayerTotal() == getDealerTotal()) {
+    console.log("push");
+    takeStakes(false, true);
+  } else {
+    console.log("dealer won");
+    takeStakes();
+  }
+}
+
+function hitPlayer() {
+  drawOneCard(dealCard).then(() => {
+    if (getPlayerTotal() > 21) bustPlayer();
+  });
+}
+function bustPlayer() {
+  console.log("player busted");
+  takeStakes();
+}
+function hitDealer() {
+  return drawOneCard((card) => dealCard(card, false));
+}
+
+function takeStakes(playerWon = false, wasPush = false, withANatural = false) {
+  if (!wasPush)
+    setBankroll(
+      getBankroll() +
+        (playerWon ? (withANatural ? wager * 1.5 : wager) : -wager)
+    );
+  setTimeout(timeToBet, 3000);
+}
+let playerActionTimeout;
+function startPlayerActionTimeout() {
+  playerActionTimeout = setTimeout(timeOutPlayer, 10000);
+}
+function timeOutPlayer() {
+  console.log("player timeout");
+  dealersTurn();
+}
+function cancelPlayerActionTimeout() {
+  clearTimeout(playerActionTimeout);
+}
+hitButton.addEventListener("click", cancelPlayerActionTimeout);
+standButton.addEventListener("click", cancelPlayerActionTimeout);

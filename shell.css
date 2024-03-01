@@ -1,5 +1,5 @@
 :root {
-  --mdc-theme-primary: rgb(239, 171, 210);
+  --mdc-theme-primary: green;
 }
 
 #menu {
@@ -41,5 +41,3 @@ footer {
     min-height: calc(100vh - 56px);
   }
 }
-
-
